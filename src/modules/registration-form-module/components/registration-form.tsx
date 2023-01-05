@@ -1,19 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import FormContent from './form-content';
+import { RegistrationPayload } from '../types/general-types';
 
 interface RegistrationFormProps {
     loading: boolean;
     error: string | null;
+    registerUser: (payload: RegistrationPayload) => void;
 }
 
 const RegistrationForm = (props: RegistrationFormProps) => {
-    const { loading, error } = props;
+    const { loading, error, registerUser } = props;
     return (
         <ExternalContainer>
             <FormContainer>
                 <TitleContainer>Sign Up</TitleContainer>
-                <FormContent loading={loading} />
+                <FormContent loading={loading} registerUser={registerUser} />
             </FormContainer>
         </ExternalContainer>
     );

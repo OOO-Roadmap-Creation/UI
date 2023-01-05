@@ -6,9 +6,11 @@ import StyledItem from '../../../lib/styled-components/styled-form-item';
 import StyledButton from '../../../lib/styled-components/styled-button';
 import colors from '../../../lib/styled-components/colors';
 import { LoadingOutlined } from '@ant-design/icons';
+import {RegistrationPayload} from "../types/general-types";
 
 interface FormContentProps {
     loading: boolean;
+    registerUser: (payload: RegistrationPayload) => void;
 }
 
 const formFields = {
@@ -45,7 +47,7 @@ const formFields = {
 };
 
 const FormContent = (props: FormContentProps) => {
-    const { loading } = props;
+    const { loading, registerUser } = props;
     const [form] = Form.useForm();
 
     const submitButtonContent = useMemo(
@@ -62,17 +64,19 @@ const FormContent = (props: FormContentProps) => {
         [loading]
     );
 
-    const [passwordsAreEqual, setPasswordsAreEqual] = useState(true);
-
-    const onRepeatedPasswordChange = () => {
-        const pass = form.getFieldValue(formFields.password.name);
-        const repeatedPass = form.getFieldValue(formFields.repeatedPassword.name);
-
-        setPasswordsAreEqual(pass === repeatedPass);
-    };
-
     return (
-        <Form form={form} layout="vertical">
+        <Form form={form} layout="vertical" onFinish={(values) => {
+            const payload: RegistrationPayload = {
+                password: values[formFields.password.name],
+                email: values[formFields.email.name],
+                nickname: values[formFields.nickname.name],
+                userInfo: {
+                    name: values[formFields.firstName.name],
+                    lastName: values[formFields.lastName.name]
+                }
+            }
+            registerUser(payload)
+        }}>
             <GridContainer>
                 <Row gutter={[16, 16]}>
                     <Col flex="auto">
@@ -131,7 +135,6 @@ const FormContent = (props: FormContentProps) => {
                             <StyledInput
                                 type="password"
                                 disabled={loading}
-                                onChange={onRepeatedPasswordChange}
                             />
                         </StyledItem>
                     </Col>

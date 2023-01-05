@@ -9,12 +9,13 @@ import {
 import { registration } from '../../../rest-handlers';
 
 function* registerUserAsync(action: RegisterUserAction) {
+    const { payload } = action;
     try {
         yield put(registerUserRequested());
         // todo resolve error is it is possible
         // @ts-ignore
         const response: any = yield call(() => {
-            return registration({})
+            return registration(payload);
         });
         yield put(registerUserSuccess());
     } catch (error) {
