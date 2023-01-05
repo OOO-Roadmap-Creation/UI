@@ -1,5 +1,3 @@
-import { registration } from './registration';
+import { register, login } from './auth';
 
-export {
-    registration
-};
+export { register, login };

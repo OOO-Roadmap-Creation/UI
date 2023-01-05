@@ -1,13 +1,19 @@
-import {RegistrationPayload} from "../types/general-types";
+import { RegistrationPayload } from '../types/general-types';
 
 const REGISTER_USER = 'REGISTER_USER';
 const REGISTER_USER_REQUESTED = 'REGISTER_USER_REQUESTED';
 const REGISTER_USER_FAILURE = 'REGISTER_USER_FAILURE';
 const REGISTER_USER_SUCCESS = 'REGISTER_USER_SUCCESS';
 
+const CLEAR_ERROR = 'CLEAR_ERROR';
+
+interface ClearErrorAction {
+    type: typeof CLEAR_ERROR;
+}
+
 export interface RegisterUserAction {
     type: typeof REGISTER_USER;
-    payload: RegistrationPayload
+    payload: RegistrationPayload;
 }
 
 interface RegisterUserRequestedAction {
@@ -26,7 +32,12 @@ interface RegisterUserFailureAction {
 export type RegistrationFormActions =
     | RegisterUserRequestedAction
     | RegisterUserSuccessAction
-    | RegisterUserFailureAction;
+    | RegisterUserFailureAction
+    | ClearErrorAction;
+
+const clearError = (): RegistrationFormActions => ({
+    type: CLEAR_ERROR
+});
 
 const registerUser = (payload: RegistrationPayload): RegisterUserAction => ({
     type: REGISTER_USER,
@@ -51,6 +62,8 @@ export {
     REGISTER_USER_SUCCESS,
     REGISTER_USER_REQUESTED,
     REGISTER_USER,
+    CLEAR_ERROR,
+    clearError,
     registerUser,
     registerUserFailure,
     registerUserRequested,

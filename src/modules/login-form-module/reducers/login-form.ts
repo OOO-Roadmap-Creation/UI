@@ -1,37 +1,36 @@
 import {
-    REGISTER_USER_REQUESTED,
-    REGISTER_USER_FAILURE,
-    REGISTER_USER_SUCCESS,
-    RegistrationFormActions
-} from '../actions/registration-form-actions';
-import { CLEAR_ERROR } from '../../login-form-module/actions/login-form-actions';
+    LOGIN_USER_FAILURE,
+    LOGIN_USER_SUCCESS,
+    LOGIN_USER_REQUESTED,
+    LoginFormActions, CLEAR_ERROR
+} from '../actions/login-form-actions';
 
-export interface RegistrationFormState {
+export interface LoginFormState {
     loading: boolean;
     error: string | null;
 }
 
-const initialState: RegistrationFormState = {
+const initialState: LoginFormState = {
     loading: false,
     error: null
 };
 
-const registrationFormReducer = (
-    state: RegistrationFormState = initialState,
-    action: RegistrationFormActions
+const loginFormReducer = (
+    state: LoginFormState = initialState,
+    action: LoginFormActions
 ) => {
     switch (action.type) {
-        case REGISTER_USER_REQUESTED:
+        case LOGIN_USER_REQUESTED:
             return {
                 ...state,
                 loading: true
             };
-        case REGISTER_USER_SUCCESS:
+        case LOGIN_USER_SUCCESS:
             return {
                 ...state,
                 loading: false
             };
-        case REGISTER_USER_FAILURE:
+        case LOGIN_USER_FAILURE:
             return {
                 ...state,
                 loading: false,
@@ -41,11 +40,11 @@ const registrationFormReducer = (
             return {
                 ...state,
                 error: null
-            };
+            }
         default: {
             return state;
         }
     }
 };
 
-export default registrationFormReducer;
+export default loginFormReducer;

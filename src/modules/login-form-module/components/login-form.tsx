@@ -1,27 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import FormContent from './form-content';
-import { RegistrationPayload } from '../types/general-types';
+import { LoginPayload } from '../types/general-types';
 
 interface RegistrationFormProps {
     loading: boolean;
     error: string | null;
-    registerUser: (payload: RegistrationPayload) => void;
+    loginUser: (payload: LoginPayload) => void;
     clearError: () => void;
 }
 
-const RegistrationForm = (props: RegistrationFormProps) => {
-    const { loading, error, registerUser, clearError } = props;
+const LoginForm = (props: RegistrationFormProps) => {
+    const { loading, error, loginUser, clearError } = props;
     return (
         <ExternalContainer>
             <FormContainer>
-                <TitleContainer>Sign Up</TitleContainer>
-                <FormContent
-                    loading={loading}
-                    registerUser={registerUser}
-                    error={error}
-                    clearError={clearError}
-                />
+                <TitleContainer>Sign In</TitleContainer>
+                <FormContent loading={loading} loginUser={loginUser} clearError={clearError} error={error}/>
             </FormContainer>
         </ExternalContainer>
     );
@@ -40,7 +35,7 @@ const ExternalContainer = styled.div`
 `;
 
 const FormContainer = styled.div`
-    width: 80%;
+    width: 60%;
     background-color: #555555;
     margin: 0 auto;
     color: white;
@@ -50,4 +45,4 @@ const FormContainer = styled.div`
     padding-bottom: 40px;
 `;
 
-export default RegistrationForm;
+export default LoginForm;

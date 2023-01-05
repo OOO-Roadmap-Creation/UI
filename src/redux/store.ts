@@ -2,10 +2,13 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 
 import { registrationFormReducer } from '../modules/registration-form-module';
+import { loginFormReducer } from '../modules/login-form-module';
+
 import { runAllSagas } from './sagas-runners';
 
 const combinedReducers = combineReducers({
-    registrationForm: registrationFormReducer
+    registrationForm: registrationFormReducer,
+    loginForm: loginFormReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();

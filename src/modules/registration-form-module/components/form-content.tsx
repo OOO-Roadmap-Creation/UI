@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Col, Form, Row, Spin } from 'antd';
 import styled from 'styled-components';
 import StyledInput from '../../../lib/styled-components/styled-form-input';
@@ -6,11 +6,16 @@ import StyledItem from '../../../lib/styled-components/styled-form-item';
 import StyledButton from '../../../lib/styled-components/styled-button';
 import colors from '../../../lib/styled-components/colors';
 import { LoadingOutlined } from '@ant-design/icons';
-import {RegistrationPayload} from "../types/general-types";
+import { RegistrationPayload } from '../types/general-types';
+import { Link } from 'react-router-dom';
+import LinkCol from '../../../lib/styled-components/link-col';
+import FormErrorWrapper from '../../../lib/styled-components/form-error-wrapper';
 
 interface FormContentProps {
     loading: boolean;
     registerUser: (payload: RegistrationPayload) => void;
+    error: string | null;
+    clearError: () => void;
 }
 
 const formFields = {
@@ -27,6 +32,11 @@ const formFields = {
         name: 'email',
         required: true,
         rules: [{ required: true, message: 'Email field is required' }, { type: 'email' }]
+    },
+    workplace: {
+        label: 'Organization',
+        name: 'workplace',
+        required: true
     },
     nickname: {
         label: 'Nickname',
@@ -47,7 +57,7 @@ const formFields = {
 };
 
 const FormContent = (props: FormContentProps) => {
-    const { loading, registerUser } = props;
+    const { loading, registerUser, error, clearError } = props;
     const [form] = Form.useForm();
 
     const submitButtonContent = useMemo(
@@ -65,18 +75,27 @@ const FormContent = (props: FormContentProps) => {
     );
 
     return (
-        <Form form={form} layout="vertical" onFinish={(values) => {
-            const payload: RegistrationPayload = {
-                password: values[formFields.password.name],
-                email: values[formFields.email.name],
-                nickname: values[formFields.nickname.name],
-                userInfo: {
-                    name: values[formFields.firstName.name],
-                    lastName: values[formFields.lastName.name]
+        <Form
+            form={form}
+            layout="vertical"
+            onFinish={(values) => {
+                const payload: RegistrationPayload = {
+                    password: values[formFields.password.name],
+                    email: values[formFields.email.name],
+                    nickname: values[formFields.nickname.name],
+                    userInfo: {
+                        name: values[formFields.firstName.name],
+                        lastName: values[formFields.lastName.name],
+                        workPlace: values[formFields.workplace.name]
+                    }
+                };
+                registerUser(payload);
+            }}
+            onChange={() => {
+                if (error) {
+                    clearError();
                 }
-            }
-            registerUser(payload)
-        }}>
+            }}>
             <GridContainer>
                 <Row gutter={[16, 16]}>
                     <Col flex="auto">
@@ -94,6 +113,14 @@ const FormContent = (props: FormContentProps) => {
                     <Col flex="auto">
                         {/* @ts-ignore */}
                         <StyledItem {...formFields.email}>
+                            <StyledInput disabled={loading} />
+                        </StyledItem>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col flex="auto">
+                        {/* @ts-ignore */}
+                        <StyledItem {...formFields.workplace}>
                             <StyledInput disabled={loading} />
                         </StyledItem>
                     </Col>
@@ -119,9 +146,9 @@ const FormContent = (props: FormContentProps) => {
                             rules={[
                                 ...formFields.repeatedPassword.rules,
                                 ({ getFieldValue }) => ({
-                                    validator(_, value) {
-                                        const pass = form.getFieldValue(formFields.password.name);
-                                        const repeatedPass = form.getFieldValue(
+                                    validator() {
+                                        const pass = getFieldValue(formFields.password.name);
+                                        const repeatedPass = getFieldValue(
                                             formFields.repeatedPassword.name
                                         );
 
@@ -132,14 +159,12 @@ const FormContent = (props: FormContentProps) => {
                                     }
                                 })
                             ]}>
-                            <StyledInput
-                                type="password"
-                                disabled={loading}
-                            />
+                            <StyledInput type="password" disabled={loading} />
                         </StyledItem>
                     </Col>
                 </Row>
-                <Row>
+                {error && <FormErrorWrapper>{error}</FormErrorWrapper>}
+                <Row justify="space-between">
                     <Col>
                         <SubmitButton
                             type="primary"
@@ -150,6 +175,9 @@ const FormContent = (props: FormContentProps) => {
                             {submitButtonContent}
                         </SubmitButton>
                     </Col>
+                    <LinkCol>
+                        <Link to={'/login'}>Sign in with an existing account</Link>
+                    </LinkCol>
                 </Row>
             </GridContainer>
         </Form>

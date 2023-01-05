@@ -6,7 +6,8 @@ import {
     registerUserFailure,
     RegisterUserAction
 } from '../actions/registration-form-actions';
-import { registration } from '../../../rest-handlers';
+import { register } from '../../../rest-handlers';
+import { AxiosError } from 'axios';
 
 function* registerUserAsync(action: RegisterUserAction) {
     const { payload } = action;
@@ -14,12 +15,14 @@ function* registerUserAsync(action: RegisterUserAction) {
         yield put(registerUserRequested());
         // todo resolve error is it is possible
         // @ts-ignore
-        const response: any = yield call(() => {
-            return registration(payload);
+        yield call(() => {
+            return register(payload);
         });
         yield put(registerUserSuccess());
     } catch (error) {
-        yield put(registerUserFailure(error as string));
+        const err = error as AxiosError;
+        const errMessage = err.message || 'Something went wrong. Please try again later';
+        yield put(registerUserFailure(errMessage));
     }
 }
 

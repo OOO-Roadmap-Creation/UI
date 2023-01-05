@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { clearError, registerUser } from '../actions/registration-form-actions';
+import { clearError, loginUser } from '../actions/login-form-actions';
 import { StateType } from '../../../redux/state-type';
-import RegistrationForm from '../components/registration-form';
+import LoginForm from '../components/login-form';
 
 const mapStateToProps = (state: StateType) => {
     const { loading, error } = state.registrationForm;
@@ -13,8 +13,8 @@ const mapStateToProps = (state: StateType) => {
 };
 
 const mapDispatchToProps = {
-    registerUser: registerUser,
+    loginUser: loginUser,
     clearError: clearError
 };
 
-export default compose(connect(mapStateToProps, mapDispatchToProps))(RegistrationForm);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(LoginForm);
