@@ -10,12 +10,14 @@ import { login } from '../../../rest-handlers';
 import { AxiosError } from 'axios';
 
 function* loginUserAsync(action: LoginUserAction) {
-    const { payload } = action;
+    const { payload, onSuccess } = action;
     try {
         yield put(loginUserRequested());
-        // @ts-ignore
-        const response: any = yield call(() => login(payload));
+        yield call(() => login(payload));
         yield put(loginUserSuccess());
+        if (onSuccess) {
+            yield call(() => onSuccess())
+        }
     } catch (error) {
         const err = error as AxiosError;
         const errMessage =

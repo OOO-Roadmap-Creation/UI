@@ -13,6 +13,8 @@ interface ClearErrorAction {
 export interface LoginUserAction {
     type: typeof LOGIN_USER;
     payload: LoginPayload;
+
+    onSuccess?: () => void;
 }
 
 interface LoginUserRequestedAction {
@@ -38,9 +40,10 @@ const clearError = (): LoginFormActions => ({
     type: CLEAR_ERROR
 });
 
-const loginUser = (payload: LoginPayload): LoginUserAction => ({
+const loginUser = (payload: LoginPayload, onSuccess?: () => void): LoginUserAction => ({
     type: LOGIN_USER,
-    payload
+    payload,
+    onSuccess
 });
 
 const loginUserRequested = (): LoginFormActions => ({

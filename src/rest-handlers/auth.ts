@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { RegistrationPayload } from '../modules/registration-form-module/types/general-types';
+import { User } from '../lib/types/general-types';
 import { LoginPayload } from '../modules/login-form-module/types/general-types';
 
 const request = axios.create({
     baseURL: 'http://localhost:3000'
 });
 
-const register = async (userInformation: RegistrationPayload) => {
+const register = async (userInformation: User) => {
     const response = await request.post('/api/user', userInformation);
     return response.data;
 };
@@ -20,4 +20,11 @@ const login = async (userInformation: LoginPayload) => {
     return response.data;
 };
 
-export { register, login };
+const getUser = async () => {
+    const response = await request.get('/api/user/profile', {
+        withCredentials: true
+    });
+    return response.data;
+};
+
+export { register, login, getUser };

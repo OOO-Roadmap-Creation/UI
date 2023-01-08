@@ -1,4 +1,4 @@
-import { RegistrationPayload } from '../types/general-types';
+import { User } from '../../../lib/types/general-types';
 
 const REGISTER_USER = 'REGISTER_USER';
 const REGISTER_USER_REQUESTED = 'REGISTER_USER_REQUESTED';
@@ -13,7 +13,8 @@ interface ClearErrorAction {
 
 export interface RegisterUserAction {
     type: typeof REGISTER_USER;
-    payload: RegistrationPayload;
+    payload: User;
+    onSuccess?: () => void;
 }
 
 interface RegisterUserRequestedAction {
@@ -39,9 +40,10 @@ const clearError = (): RegistrationFormActions => ({
     type: CLEAR_ERROR
 });
 
-const registerUser = (payload: RegistrationPayload): RegisterUserAction => ({
+const registerUser = (payload: User, onSuccess?: () => void): RegisterUserAction => ({
     type: REGISTER_USER,
-    payload
+    payload,
+    onSuccess
 });
 
 const registerUserRequested = (): RegistrationFormActions => ({

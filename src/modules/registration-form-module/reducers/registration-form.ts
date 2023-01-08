@@ -4,7 +4,7 @@ import {
     REGISTER_USER_SUCCESS,
     RegistrationFormActions
 } from '../actions/registration-form-actions';
-import { CLEAR_ERROR } from '../../login-form-module/actions/login-form-actions';
+import { CLEAR_ERROR } from '../actions/registration-form-actions';
 
 export interface RegistrationFormState {
     loading: boolean;

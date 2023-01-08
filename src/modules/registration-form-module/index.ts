@@ -1,4 +1,4 @@
-import registrationFormReducer, { RegistrationFormState } from './reducers/registration-form';
+import { RegistrationFormState, registrationFormReducer } from './reducers';
 import RegistrationForm from './containers/registration-form';
 
 export { registrationFormReducer };

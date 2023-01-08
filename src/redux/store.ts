@@ -3,12 +3,16 @@ import createSagaMiddleware from 'redux-saga';
 
 import { registrationFormReducer } from '../modules/registration-form-module';
 import { loginFormReducer } from '../modules/login-form-module';
+import { mainPageReducer } from '../modules/main-page';
+import { authHandlerReducer } from '../modules/auth-handler';
 
 import { runAllSagas } from './sagas-runners';
 
 const combinedReducers = combineReducers({
     registrationForm: registrationFormReducer,
-    loginForm: loginFormReducer
+    loginForm: loginFormReducer,
+    mainPage: mainPageReducer,
+    authorization: authHandlerReducer
 });
 
 const sagaMiddleware = createSagaMiddleware();

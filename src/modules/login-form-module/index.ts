@@ -1,4 +1,4 @@
-import loginFormReducer, { LoginFormState } from './reducers/login-form';
+import { LoginFormState, loginFormReducer } from './reducers';
 import LoginForm from './containers/login-form';
 
 export { loginFormReducer };

@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import FormContent from './form-content';
-import { RegistrationPayload } from '../types/general-types';
+import { User } from '../../../lib/types/general-types';
 
 interface RegistrationFormProps {
     loading: boolean;
     error: string | null;
-    registerUser: (payload: RegistrationPayload) => void;
+    registerUser: (payload: User, onSuccess?: () => void) => void;
     clearError: () => void;
 }
 

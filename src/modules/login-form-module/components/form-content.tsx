@@ -7,13 +7,13 @@ import StyledButton from '../../../lib/styled-components/styled-button';
 import colors from '../../../lib/styled-components/colors';
 import { LoadingOutlined } from '@ant-design/icons';
 import { LoginPayload } from '../types/general-types';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LinkCol from '../../../lib/styled-components/link-col';
 import FormErrorWrapper from '../../../lib/styled-components/form-error-wrapper';
 
 interface FormContentProps {
     loading: boolean;
-    loginUser: (payload: LoginPayload) => void;
+    loginUser: (payload: LoginPayload, onSuccess?: () => void) => void;
     error: string | null;
     clearError: () => void;
 }
@@ -35,7 +35,7 @@ const formFields = {
 const FormContent = (props: FormContentProps) => {
     const { loading, loginUser, clearError, error } = props;
     const [form] = Form.useForm();
-
+    const navigate = useNavigate();
     const submitButtonContent = useMemo(
         () =>
             loading ? (
@@ -59,7 +59,9 @@ const FormContent = (props: FormContentProps) => {
                     password: values[formFields.password.name],
                     username: values[formFields.username.name]
                 };
-                loginUser(payload);
+                loginUser(payload, () => {
+                    navigate('/');
+                });
             }}
             onChange={() => {
                 if (error) {

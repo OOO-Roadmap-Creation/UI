@@ -6,7 +6,7 @@ import { LoginPayload } from '../types/general-types';
 interface RegistrationFormProps {
     loading: boolean;
     error: string | null;
-    loginUser: (payload: LoginPayload) => void;
+    loginUser: (payload: LoginPayload, onSuccess?: () => void) => void;
     clearError: () => void;
 }
 

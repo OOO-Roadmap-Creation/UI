@@ -1,4 +1,3 @@
-
 interface UserInformation {
     name?: string;
     lastName?: string;
@@ -6,7 +5,7 @@ interface UserInformation {
     workPlace?: string;
 }
 
-export interface RegistrationPayload {
+export interface User {
     email: string;
     password: string;
     nickname?: string;

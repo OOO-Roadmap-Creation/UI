@@ -6,14 +6,14 @@ import StyledItem from '../../../lib/styled-components/styled-form-item';
 import StyledButton from '../../../lib/styled-components/styled-button';
 import colors from '../../../lib/styled-components/colors';
 import { LoadingOutlined } from '@ant-design/icons';
-import { RegistrationPayload } from '../types/general-types';
-import { Link } from 'react-router-dom';
+import { User } from '../../../lib/types/general-types';
+import { Link, useNavigate } from 'react-router-dom';
 import LinkCol from '../../../lib/styled-components/link-col';
 import FormErrorWrapper from '../../../lib/styled-components/form-error-wrapper';
 
 interface FormContentProps {
     loading: boolean;
-    registerUser: (payload: RegistrationPayload) => void;
+    registerUser: (payload: User, onSuccess?: () => void) => void;
     error: string | null;
     clearError: () => void;
 }
@@ -35,8 +35,7 @@ const formFields = {
     },
     workplace: {
         label: 'Organization',
-        name: 'workplace',
-        required: true
+        name: 'workplace'
     },
     nickname: {
         label: 'Nickname',
@@ -59,7 +58,7 @@ const formFields = {
 const FormContent = (props: FormContentProps) => {
     const { loading, registerUser, error, clearError } = props;
     const [form] = Form.useForm();
-
+    const navigate = useNavigate();
     const submitButtonContent = useMemo(
         () =>
             loading ? (
@@ -79,7 +78,7 @@ const FormContent = (props: FormContentProps) => {
             form={form}
             layout="vertical"
             onFinish={(values) => {
-                const payload: RegistrationPayload = {
+                const payload: User = {
                     password: values[formFields.password.name],
                     email: values[formFields.email.name],
                     nickname: values[formFields.nickname.name],
@@ -89,7 +88,9 @@ const FormContent = (props: FormContentProps) => {
                         workPlace: values[formFields.workplace.name]
                     }
                 };
-                registerUser(payload);
+                registerUser(payload, () => {
+                    navigate('/login');
+                });
             }}
             onChange={() => {
                 if (error) {
