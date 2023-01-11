@@ -6,7 +6,7 @@ import {
     getUserSuccess
 } from '../actions/auth-handler-actions';
 import { AxiosError } from 'axios';
-import { getUser } from '../../../rest-handlers/auth';
+import { getUser } from '../../../rest-handlers';
 import { User } from '../../../lib/types/general-types';
 
 function* getUserAsync() {

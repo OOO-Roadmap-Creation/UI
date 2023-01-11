@@ -8,15 +8,18 @@ import {
 } from '../actions/login-form-actions';
 import { login } from '../../../rest-handlers';
 import { AxiosError } from 'axios';
+import { getUserSuccess } from '../../auth-handler';
+import { User } from '../../../lib/types/general-types';
 
 function* loginUserAsync(action: LoginUserAction) {
     const { payload, onSuccess } = action;
     try {
         yield put(loginUserRequested());
-        yield call(() => login(payload));
+        const response: User = yield call(() => login(payload));
         yield put(loginUserSuccess());
+        yield put(getUserSuccess(response));
         if (onSuccess) {
-            yield call(() => onSuccess())
+            yield call(() => onSuccess());
         }
     } catch (error) {
         const err = error as AxiosError;

@@ -101,12 +101,12 @@ const FormContent = (props: FormContentProps) => {
                 <Row gutter={[16, 16]}>
                     <Col flex="auto">
                         <StyledItem {...formFields.firstName}>
-                            <StyledInput disabled={loading} />
+                            <StyledInput disabled={loading} size="large"/>
                         </StyledItem>
                     </Col>
                     <Col flex="auto">
                         <StyledItem {...formFields.lastName}>
-                            <StyledInput disabled={loading} />
+                            <StyledInput disabled={loading} size="large"/>
                         </StyledItem>
                     </Col>
                 </Row>
@@ -114,7 +114,7 @@ const FormContent = (props: FormContentProps) => {
                     <Col flex="auto">
                         {/* @ts-ignore */}
                         <StyledItem {...formFields.email}>
-                            <StyledInput disabled={loading} />
+                            <StyledInput disabled={loading} size="large"/>
                         </StyledItem>
                     </Col>
                 </Row>
@@ -122,21 +122,21 @@ const FormContent = (props: FormContentProps) => {
                     <Col flex="auto">
                         {/* @ts-ignore */}
                         <StyledItem {...formFields.workplace}>
-                            <StyledInput disabled={loading} />
+                            <StyledInput disabled={loading} size="large"/>
                         </StyledItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col flex="auto">
                         <StyledItem {...formFields.nickname}>
-                            <StyledInput disabled={loading} />
+                            <StyledInput disabled={loading} size="large"/>
                         </StyledItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col flex="auto">
                         <StyledItem {...formFields.password}>
-                            <StyledInput type="password" disabled={loading} />
+                            <StyledInput type="password" disabled={loading} size="large"/>
                         </StyledItem>
                     </Col>
                 </Row>
@@ -160,7 +160,7 @@ const FormContent = (props: FormContentProps) => {
                                     }
                                 })
                             ]}>
-                            <StyledInput type="password" disabled={loading} />
+                            <StyledInput type="password" disabled={loading} size="large"/>
                         </StyledItem>
                     </Col>
                 </Row>

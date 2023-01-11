@@ -2,9 +2,9 @@ import {
     REGISTER_USER_REQUESTED,
     REGISTER_USER_FAILURE,
     REGISTER_USER_SUCCESS,
-    RegistrationFormActions
+    RegistrationFormActions,
+    CLEAR_ERROR
 } from '../actions/registration-form-actions';
-import { CLEAR_ERROR } from '../actions/registration-form-actions';
 
 export interface RegistrationFormState {
     loading: boolean;

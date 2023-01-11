@@ -1,4 +1,5 @@
 interface UserInformation {
+    id?: number;
     name?: string;
     lastName?: string;
     patronymic?: string;
@@ -6,8 +7,10 @@ interface UserInformation {
 }
 
 export interface User {
+    id?: number;
     email: string;
     password: string;
     nickname?: string;
+    role?: string;
     userInfo?: UserInformation;
 }

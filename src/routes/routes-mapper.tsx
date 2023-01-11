@@ -7,12 +7,12 @@ interface RoutesMapProps {
 }
 
 const RoutesMap = (props: RoutesMapProps) => {
-    const {routesMap} = props
+    const { routesMap } = props;
     return (
         <Routes>
             {Object.entries(routesMap).map(([route, routeConfig]) => {
                 const { component: Component } = routeConfig;
-                return <Route key={route} path={route} element={<Component />} index />;
+                return <Route key={route} path={route} element={<Component />} />;
             })}
         </Routes>
     );

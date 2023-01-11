@@ -1,5 +1,5 @@
 import React from 'react';
-import generalRoutesMap from '../../../routes/general-routes';
+import generalRoutesMap from '../../../routes/general-routes-map';
 import styled from 'styled-components';
 import colors from '../../../lib/styled-components/colors';
 import { Link, useLocation } from 'react-router-dom';
@@ -12,7 +12,7 @@ const Menu = (props: MenuProps) => {
         <Wrapper>
             {Object.entries(generalRoutesMap).map(([key, value]) => {
                 return (
-                    <MenuItem $active={location.pathname.includes(key)}>
+                    <MenuItem $active={location.pathname.includes(key)} key={key}>
                         <Link to={key}>{value.menuTitle}</Link>
                     </MenuItem>
                 );
@@ -25,7 +25,7 @@ const Wrapper = styled.div`
     margin-top: 50px;
 `;
 const MenuItem = styled.div<{ $active?: boolean }>`
-    width: 100%;
+    width: 93%;
     background-color: ${({ $active }) => ($active ? colors.grayDark : 'transparent')};
     font-size: 30px;
     text-align: center;

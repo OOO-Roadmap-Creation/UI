@@ -30,6 +30,7 @@ const RegistrationForm = (props: RegistrationFormProps) => {
 const TitleContainer = styled.div`
     font-size: 72px;
     text-align: center;
+    font-weight: 100;
 `;
 
 const ExternalContainer = styled.div`

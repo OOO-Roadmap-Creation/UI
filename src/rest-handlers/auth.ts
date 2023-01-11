@@ -20,11 +20,9 @@ const login = async (userInformation: LoginPayload) => {
     return response.data;
 };
 
-const getUser = async () => {
-    const response = await request.get('/api/user/profile', {
-        withCredentials: true
-    });
+const logout = async () => {
+    const response = await request.post('/api/user-auth/logout');
     return response.data;
 };
 
-export { register, login, getUser };
+export { register, login, logout };

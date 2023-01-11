@@ -60,7 +60,7 @@ const FormContent = (props: FormContentProps) => {
                     username: values[formFields.username.name]
                 };
                 loginUser(payload, () => {
-                    navigate('/');
+                    navigate('/general/personal');
                 });
             }}
             onChange={() => {
@@ -72,14 +72,14 @@ const FormContent = (props: FormContentProps) => {
                 <Row>
                     <Col flex="auto">
                         <StyledItem {...formFields.username}>
-                            <StyledInput disabled={loading} />
+                            <StyledInput disabled={loading} size="large" />
                         </StyledItem>
                     </Col>
                 </Row>
                 <Row>
                     <Col flex="auto">
                         <StyledItem {...formFields.password}>
-                            <StyledInput type="password" disabled={loading} />
+                            <StyledInput type="password" disabled={loading} size="large" />
                         </StyledItem>
                     </Col>
                 </Row>

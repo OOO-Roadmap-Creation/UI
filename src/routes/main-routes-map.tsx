@@ -4,7 +4,8 @@ import MainPage from '../modules/main-page';
 import AuthWrapper from '../modules/auth-handler';
 import React from 'react';
 import MainLoader from '../lib/components/main-loader';
-import styled from "styled-components";
+import styled from 'styled-components';
+import RoadmapCreation from '../modules/roadmap-creation';
 
 const mainRoutesMap = {
     '/registration': {
@@ -23,7 +24,18 @@ const mainRoutesMap = {
         component: () => <LoginForm />
     },
     '/general/*': {
-        component: () => <MainPage />
+        component: () => (
+            <AuthWrapper>
+                <MainPage />
+            </AuthWrapper>
+        )
+    },
+    '/roadmap-creation': {
+        component: () => (
+            <AuthWrapper>
+                <RoadmapCreation />
+            </AuthWrapper>
+        )
     }
 };
 

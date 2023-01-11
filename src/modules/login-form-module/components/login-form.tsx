@@ -16,7 +16,12 @@ const LoginForm = (props: RegistrationFormProps) => {
         <ExternalContainer>
             <FormContainer>
                 <TitleContainer>Sign In</TitleContainer>
-                <FormContent loading={loading} loginUser={loginUser} clearError={clearError} error={error}/>
+                <FormContent
+                    loading={loading}
+                    loginUser={loginUser}
+                    clearError={clearError}
+                    error={error}
+                />
             </FormContainer>
         </ExternalContainer>
     );
@@ -25,6 +30,7 @@ const LoginForm = (props: RegistrationFormProps) => {
 const TitleContainer = styled.div`
     font-size: 72px;
     text-align: center;
+    font-weight: 100;
 `;
 
 const ExternalContainer = styled.div`
@@ -37,7 +43,7 @@ const ExternalContainer = styled.div`
 const FormContainer = styled.div`
     width: 60%;
     background-color: #555555;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
     color: white;
     border-radius: 6px;
     box-shadow: 0 0 5px 3px #555555;

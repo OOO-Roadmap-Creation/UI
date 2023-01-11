@@ -23,7 +23,7 @@ const AuthWrapper = (props: AuthWrapperProps) => {
 
     if (!initialAuthHandled) {
         if (!isRootPath) {
-            return <Navigate replace to="/login" />;
+            return <Navigate replace to="/" />;
         } else {
             return Component;
         }

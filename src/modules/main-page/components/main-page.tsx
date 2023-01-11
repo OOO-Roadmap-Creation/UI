@@ -3,6 +3,8 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import colors from '../../../lib/styled-components/colors';
 import Menu from './menu';
+import RoutesMap from '../../../routes/routes-mapper';
+import generalRoutesMap from '../../../routes/general-routes-map';
 
 const MENU_WIDTH = 300;
 const ICON_WIDTH = 50;
@@ -27,6 +29,7 @@ const MainPage = (props: MainPageProps) => {
                     <IconDecorator />
                 </RightPart>
             </MenuWrapper>
+            <RoutesMap routesMap={generalRoutesMap} />
         </MainContainer>
     );
 };
